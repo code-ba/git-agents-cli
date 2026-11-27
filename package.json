@@ -1,0 +1,70 @@
+{
+  "name": "git-agents-cli",
+  "version": "0.1.0",
+  "description": "git 多组织 CLI 统一入口：git ai、git clear、git gpg、git agent",
+  "type": "module",
+  "bin": {
+    "git-agents-cli": "bin/index.cjs",
+    "git-agent": "bin/agent.cjs",
+    "git-ai": "bin/ai.cjs",
+    "git-clear": "bin/clear.cjs",
+    "git-gpg": "bin/gpg.cjs"
+  },
+  "files": [
+    "bin/",
+    "dist/"
+  ],
+  "engines": {
+    "node": ">=12.20.0"
+  },
+  "homepage": "https://github.com/code-ba/git-agents-cli",
+  "bugs": {
+    "url": "https://github.com/code-ba/git-agents-cli/issues",
+    "email": "info@cxvh.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/code-ba/git-agents-cli.git"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "author": {
+    "name": "Baran",
+    "email": "info@cxvh.com",
+    "url": "https://github.com/code-ba"
+  },
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint . --ext .js,.mjs,.cjs,.mts",
+    "lint:fix": "eslint . --ext .js,.mjs,.cjs,.mts --fix",
+    "format": "prettier --check .",
+    "format:write": "prettier --write .",
+    "version:bump": "node scripts/bump-version.mjs",
+    "prepare": "husky install",
+    "postinstall": "node -e \"const fs = require('fs'); if (fs.existsSync('dist/postinstall.mjs')) { require('child_process').execFileSync(process.execPath, ['dist/postinstall.mjs'], { stdio: 'inherit' }); }\"",
+    "prepublishOnly": "npm run build"
+  },
+  "lint-staged": {
+    "*.{js,mjs,cjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.mts": [
+      "eslint --fix"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "22.20.7",
+    "@typescript-eslint/eslint-plugin": "8.74.0",
+    "@typescript-eslint/parser": "8.74.0",
+    "axios": "1.13.1",
+    "eslint": "8.57.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "2.8.8",
+    "typescript": "5.9.3"
+  }
+}
